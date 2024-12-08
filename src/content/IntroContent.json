@@ -1,12 +1,12 @@
 {
-  "title": "Landing page template for developers & startups",
-  "text": "Beautifully designed templates using React.js, ant design and styled-components! Save weeks of time and build your landing page in minutes.",
+  "title": "Мы Оверсан",
+  "text": "C 2017 года избавляем клиентов от головной боли, связанной с проектированием и вводом в эксплуатацию любых инженерных систем.",
   "button": [
     {
-      "title": "Explore"
+      "title": "О нас"
     },
     {
-      "title": "Learn more",
+      "title": "Узнать больше",
       "color": "#fff"
     }
   ]

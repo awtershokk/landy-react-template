@@ -4,15 +4,15 @@ export default function validate(values: validateProps) {
   let errors = {} as validateProps;
 
   if (!values.name) {
-    errors.name = "Name is required";
+    errors.name = "Поле ФИО не заполненно";
   }
   if (!values.email) {
-    errors.email = "Email address is required";
+    errors.email = "Поле Email не заполнено";
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-    errors.email = "Email address is invalid";
+    errors.email = "Адрес электронной почты недействителен";
   }
   if (!values.message) {
-    errors.message = "Message is required";
+    errors.message = "Поле сообщение не заполнено";
   }
   return errors;
 }
