@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { notification } from "antd";
 
+const fieldMapping = {
+  "Тип услуги": 'serviceType',
+  "Дополнительные опции": 'additionalOptions',
+  "Тип проекта": 'projectType',
+  "Тип материала": 'materialType',
+  "Срочность": 'urgency',
+};
+
 interface IValues {
   name: string;
   email: string;
@@ -8,9 +16,9 @@ interface IValues {
   serviceType: string;
   quantity: string;
   additionalOptions: string;
-  projectType: string; // Новое поле
-  materialType: string; // Новое поле
-  urgency: string; // Новое поле
+  projectType: string;
+  materialType: string;
+  urgency: string;
 }
 
 const initialValues: IValues = {
@@ -20,18 +28,18 @@ const initialValues: IValues = {
   serviceType: "",
   quantity: "",
   additionalOptions: "",
-  projectType: "", // Новое поле
-  materialType: "", // Новое поле
-  urgency: "", // Новое поле
+  projectType: "",
+  materialType: "",
+  urgency: "",
 };
 
 export const useForm = (validate: (values: IValues) => IValues) => {
   const [formState, setFormState] = useState<{
     values: IValues;
-    errors: Partial<IValues>; // Ошибки могут быть не у всех полей
+    errors: IValues;
   }>({
     values: { ...initialValues },
-    errors: {},
+    errors: { ...initialValues },
   });
 
   const handleSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
@@ -39,11 +47,18 @@ export const useForm = (validate: (values: IValues) => IValues) => {
     const values = formState.values;
     const errors = validate(values);
     setFormState((prevState) => ({ ...prevState, errors }));
+
+    if (Object.keys(errors).length === 0) {
       notification["success"]({
         message: "Отлично",
         description: "Ваше сообщение отправлено!",
       });
-
+    } else {
+      notification["error"]({
+        message: "Ошибка",
+        description: "Проверьте правильность заполнения формы!",
+      });
+    }
   };
 
   const handleChange = (
@@ -51,15 +66,19 @@ export const useForm = (validate: (values: IValues) => IValues) => {
   ) => {
     event.persist();
     const { name, value } = event.target;
+
+    // Маппинг русских имен на английские ключи
+    const englishName = fieldMapping[name as keyof typeof fieldMapping] || name;
+
     setFormState((prevState) => ({
       ...prevState,
       values: {
         ...prevState.values,
-        [name]: value,
+        [englishName]: value,
       },
       errors: {
         ...prevState.errors,
-        [name]: "",
+        [englishName]: "",
       },
     }));
   };

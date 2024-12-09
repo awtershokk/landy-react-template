@@ -105,7 +105,7 @@ const CostCalculator = ({ title, content, id, t }: ContactProps) => {
                             </Col>
                             <Col span={24}>
                                 <Select
-                                    name="Выполнить срочно (3-4 недели)"
+                                    name="urgency"
                                     placeholder="Срочность"
                                     options={[
                                         { label: "Нет", value: "no" },
