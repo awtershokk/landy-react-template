@@ -34,3 +34,10 @@ export const ButtonContainer = styled("div")`
     padding-top: 0.75rem;
   }
 `;
+
+export const Result = styled.div`
+    margin-top: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+`;

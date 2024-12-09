@@ -51,11 +51,11 @@ const Footer = ({ t }: { t: TFunction }) => {
         <Container>
           <Row justify="space-between" align="middle">
             <Col>
-              <Language>{t("Contact")}</Language>
+              <Language>{t("Контакты")}</Language>
               <Large to="/">{t("Мы в Telegram")}</Large>
             </Col>
             <Col>
-              <Title>{t("Policy")}</Title>
+              <Title>{t("Политика")}</Title>
               <Large to="/">{t("Политика компании")}</Large>
             </Col>
             <Col>

@@ -30,7 +30,14 @@ export interface InputProps {
   ) => void;
 }
 export interface validateProps {
-  name: string;
-  message: string;
-  email: string;
+  name: string; // Имя пользователя
+  email: string; // Электронная почта
+  message: string; // Сообщение
+  serviceType: string; // Тип услуги
+  quantity: string; // Количество
+  additionalOptions: string; // Дополнительные опции
+  projectType: string; // Тип проекта (малый, средний, крупный)
+  materialType: string; // Тип материала (стандартный, премиум)
+  urgency: string; // Срочность выполнения (да/нет)
 }
+
