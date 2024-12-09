@@ -98,7 +98,7 @@ const CostCalculator = ({ title, content, id, t }: ContactProps) => {
                             </Col>
                             <Col span={24}>
                                 <Select
-                                    name="urgency"
+                                    name="Срочность"
                                     placeholder="Срочность"
                                     options={[
                                         { label: "Нет", value: "no" },
