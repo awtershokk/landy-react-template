@@ -4,10 +4,9 @@ import { Slide } from "react-awesome-reveal";
 import { ContactProps, ValidationTypeProps } from "./types";
 import { useForm } from "../../common/utils/useForm";
 import validate from "../../common/utils/validationRules";
-import { Button } from "../../common/Button";
 import Block from "../Block";
 import Select from "../../common/Select";
-import { ContactContainer, FormGroup, Span, ButtonContainer, Result } from "./styles";
+import { ContactContainer, FormGroup, Span, Result } from "./styles";
 
 const CostCalculator = ({ title, content, id, t }: ContactProps) => {
     const { values, errors, handleChange, handleSubmit } = useForm(validate);
