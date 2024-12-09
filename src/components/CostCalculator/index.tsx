@@ -1,15 +1,15 @@
 import { Row, Col } from "antd";
 import { withTranslation } from "react-i18next";
 import { Slide } from "react-awesome-reveal";
-import { ContactProps, ValidationTypeProps } from "./types";
+import { ContactProps } from "./types";
 import { useForm } from "../../common/utils/useForm";
 import validate from "../../common/utils/validationRules";
 import Block from "../Block";
 import Select from "../../common/Select";
-import { ContactContainer, FormGroup, Span, Result } from "./styles";
+import { ContactContainer, FormGroup, Result } from "./styles";
 
 const CostCalculator = ({ title, content, id, t }: ContactProps) => {
-    const { values, errors, handleChange, handleSubmit } = useForm(validate);
+    const { values, handleChange, handleSubmit } = useForm(validate);
 
     const calculateCost = () => {
         const serviceType = values.serviceType as "basic" | "premium" | "consulting"; // Явное приведение типа
@@ -33,12 +33,6 @@ const CostCalculator = ({ title, content, id, t }: ContactProps) => {
 
         // Итоговая стоимость
         return (baseCost + additionalOptions) * projectMultiplier * materialMultiplier + urgency;
-    };
-
-
-    const ValidationType = ({ type }: ValidationTypeProps) => {
-        const ErrorMessage = errors[type as keyof typeof errors];
-        return <Span>{ErrorMessage}</Span>;
     };
 
     return (
