@@ -43,8 +43,9 @@ const Footer = ({ t }: { t: TFunction }) => {
           <Row justify="space-between" align="middle">
             <Col>
               <Language>{t("Контакты")}</Language>
-              <Large to="/">{t("Мы в Telegram")}</Large>
-            </Col>
+              <Large as="a" href="http://t.me/oversun24" target="_blank" rel="noopener noreferrer">
+                {t("Мы в Telegram")}
+              </Large>            </Col>
             <Col>
               <Title>{t("Политика")}</Title>
               <Large to="/">{t("Политика компании")}</Large>

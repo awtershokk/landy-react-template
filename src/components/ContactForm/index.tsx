@@ -1,21 +1,59 @@
 import { Row, Col } from "antd";
 import { withTranslation } from "react-i18next";
 import { Slide } from "react-awesome-reveal";
-import { ContactProps, ValidationTypeProps } from "./types";
-import { useForm } from "../../common/utils/useForm";
-import validate from "../../common/utils/validationRules";
+import { ContactProps } from "./types";
 import { Button } from "../../common/Button";
 import Block from "../Block";
 import Input from "../../common/Input";
 import TextArea from "../../common/TextArea";
 import { ContactContainer, FormGroup, Span, ButtonContainer } from "./styles";
+import { toast, ToastContainer } from "react-toastify";  // Правильный импорт ToastContainer
+import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
 
 const Contact = ({ title, content, id, t }: ContactProps) => {
-  const { values, errors, handleChange, handleSubmit } = useForm(validate);
+  const [values, setValues] = React.useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-  const ValidationType = ({ type }: ValidationTypeProps) => {
-    const ErrorMessage = errors[type as keyof typeof errors];
-    return <Span>{ErrorMessage}</Span>;
+  const [errors, setErrors] = React.useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const validateFields = () => {
+    const errors: any = {};
+    if (!values.name) errors.name = "Пожалуйста, введите ваше ФИО.";
+    if (!values.email) errors.email = "Пожалуйста, введите ваш Email.";
+    else if (!/\S+@\S+\.\S+/.test(values.email)) errors.email = "Неверный формат Email.";
+    if (!values.message) errors.message = "Пожалуйста, введите ваше сообщение.";
+    return errors;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const fieldErrors = validateFields();
+    if (Object.keys(fieldErrors).length > 0) {
+      setErrors(fieldErrors);
+    } else {
+      setValues({
+        name: "",
+        email: "",
+        message: "",
+      });
+      toast.success("Форма успешно отправлена!");
+    }
   };
 
   return (
@@ -32,31 +70,31 @@ const Contact = ({ title, content, id, t }: ContactProps) => {
                 <Col span={24}>
                   <Input
                       type="text"
-                      name="ФИО"
+                      name="name"
                       placeholder="Ваше ФИО"
-                      value={values.name || ""}
+                      value={values.name}
                       onChange={handleChange}
                   />
-                  <ValidationType type="name" />
+                  {errors.name && <Span>{errors.name}</Span>}
                 </Col>
                 <Col span={24}>
                   <Input
                       type="text"
                       name="email"
                       placeholder="Ваш Email"
-                      value={values.email || ""}
+                      value={values.email}
                       onChange={handleChange}
                   />
-                  <ValidationType type="email" />
+                  {errors.email && <Span>{errors.email}</Span>}
                 </Col>
                 <Col span={24}>
                   <TextArea
                       placeholder="Ваше сообщение"
-                      value={values.message || ""}
-                      name="Сообщение"
+                      value={values.message}
+                      name="message"
                       onChange={handleChange}
                   />
-                  <ValidationType type="message" />
+                  {errors.message && <Span>{errors.message}</Span>}
                 </Col>
                 <ButtonContainer>
                   <Button name="submit">{t("Отправить")}</Button>
@@ -65,6 +103,7 @@ const Contact = ({ title, content, id, t }: ContactProps) => {
             </Slide>
           </Col>
         </Row>
+        <ToastContainer />
       </ContactContainer>
   );
 };
