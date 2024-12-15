@@ -52,7 +52,7 @@ const Footer = ({ t }: { t: TFunction }) => {
             </Col>
             <Col>
               <Language>{t("Адрес")}</Language>
-              <Para>Красноярский рабочий 156</Para>
+              <Para>Дудинская 3 Стр. 5</Para>
 
             </Col>
           </Row>
