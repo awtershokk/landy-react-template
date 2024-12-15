@@ -80,7 +80,7 @@ const Contact = ({ title, content, id, t }: ContactProps) => {
                 <Col span={24}>
                   <Input
                       type="text"
-                      name="email"
+                      name="Электронная почта"
                       placeholder="Ваш Email"
                       value={values.email}
                       onChange={handleChange}
@@ -91,7 +91,7 @@ const Contact = ({ title, content, id, t }: ContactProps) => {
                   <TextArea
                       placeholder="Ваше сообщение"
                       value={values.message}
-                      name="message"
+                      name="Сообщение"
                       onChange={handleChange}
                   />
                   {errors.message && <Span>{errors.message}</Span>}
